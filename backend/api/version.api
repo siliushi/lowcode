@@ -1,0 +1,17 @@
+syntax = "v1"
+
+type VersionResponse {
+	Version string `json:"version"` //版本号
+}
+
+@server(
+	group: version
+	prefix: /api
+)
+service lowcode-api {
+	@doc(
+		summary: "版本"
+	)
+	@handler Version
+	get /version returns (VersionResponse)
+}

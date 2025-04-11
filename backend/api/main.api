@@ -1,0 +1,12 @@
+syntax = "v1"
+info(
+	title: "lowcode API"
+	desc: "lowcode server swagger API"
+	version: "v1.0"
+)
+
+import (
+	"login.api"
+	"books.api"
+	"version.api"
+)

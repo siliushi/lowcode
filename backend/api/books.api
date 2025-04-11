@@ -1,0 +1,85 @@
+syntax = "v1"
+
+type Book {
+	ID    int64   `json:"id" validate:"required"`         //书籍编号
+	Name  string  `json:"name"`                           //书籍名称
+	Price float64 `json:"price" validate:"gte=1,lte=130"` //书籍价格
+}
+
+type ListRequest {
+	Page     int `json:"page,default=1"`      //分页的页码，从1开始
+	PageSize int `json:"pagesize,default=50"` //每页数据
+}
+
+type ListResponse {
+	Books []Book `json:"books"` //书籍列表
+}
+
+type DetailRequest {
+	ID int64 `json:"id,default=1"` //书籍编号
+}
+
+type DetailResponse {
+	Book Book `json:"book"` //书籍详细信息
+}
+
+type AddRequest {
+	Name  string  `json:"name,default=google"` //书籍名称
+	Price float64 `json:"price,default=8.80"`  //书籍价格
+}
+
+type AddResponse {
+}
+
+type UpdateRequest {
+	ID    int64   `json:"id,default=1"`   //书籍编号，依据编号更新其余两个信息
+	Name  string  `json:"name,optional"`  //书籍名称
+	Price float64 `json:"price,optional"` //书籍价格
+}
+
+type UpdateResponse {
+}
+
+type DeleteRequest {
+	ID int64 `json:"id,default=1"`
+}
+
+type DeleteResponse {
+}
+
+@server(
+	group: books
+	jwt: Auth
+	prefix: /api
+)
+service lowcode-api {
+	@doc(
+		summary: "书籍列表"
+	)
+	@handler ListBooks
+	post /book/list (ListRequest) returns (ListResponse)
+	
+	@doc(
+		summary: "书籍详细"
+	)
+	@handler DetailBookHandler
+	post /book/detail (DetailRequest) returns (DetailResponse)
+	
+	@doc(
+		summary: "添加书籍"
+	)
+	@handler AddBook
+	post /book/add (AddRequest) returns (AddResponse)
+	
+	@doc(
+		summary: "更新书籍"
+	)
+	@handler UpdateBook
+	post /book/update (UpdateRequest) returns (UpdateResponse)
+	
+	@doc(
+		summary: "删除书籍"
+	)
+	@handler DeleteBookHandler
+	post /book/delete (DeleteRequest) returns (DeleteResponse)
+}

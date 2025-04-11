@@ -1,0 +1,22 @@
+syntax = "v1"
+
+type LoginRequest {
+	Name   string `json:"name,default=admin"`    //用户名
+	Passwd string `json:"passwd,default=123456"` //密码
+}
+
+type LoginResponse {
+	JwtToken string `json:"jwttoken"` //jwt token
+}
+
+@server(
+	group: user
+	prefix: /api
+)
+service lowcode-api {
+	@doc(
+		summary: "登录"
+	)
+	@handler Login
+	post /login (LoginRequest) returns (LoginResponse)
+}

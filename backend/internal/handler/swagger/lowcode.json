@@ -1,0 +1,444 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "lowcode API",
+    "description": "lowcode server swagger API",
+    "version": "v1.0"
+  },
+  "host": "127.0.0.1:8888",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/book/add": {
+      "post": {
+        "summary": "添加书籍",
+        "operationId": "AddBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/AddResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddRequest"
+            }
+          }
+        ],
+        "tags": [
+          "books"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/book/delete": {
+      "post": {
+        "summary": "删除书籍",
+        "operationId": "DeleteBookHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "books"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/book/detail": {
+      "post": {
+        "summary": "书籍详细",
+        "operationId": "DetailBookHandler",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/DetailResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetailRequest"
+            }
+          }
+        ],
+        "tags": [
+          "books"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/book/list": {
+      "post": {
+        "summary": "书籍列表",
+        "operationId": "ListBooks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "books"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/book/update": {
+      "post": {
+        "summary": "更新书籍",
+        "operationId": "UpdateBook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UpdateResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "books"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/api/login": {
+      "post": {
+        "summary": "登录",
+        "operationId": "Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/api/version": {
+      "get": {
+        "summary": "版本",
+        "operationId": "Version",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/VersionResponse"
+            }
+          }
+        },
+        "tags": [
+          "version"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AddRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "google",
+          "description": "书籍名称"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "default": "8.80",
+          "description": "书籍价格"
+        }
+      },
+      "title": "AddRequest",
+      "required": [
+        "name",
+        "price"
+      ]
+    },
+    "AddResponse": {
+      "type": "object",
+      "title": "AddResponse"
+    },
+    "Book": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "书籍编号"
+        },
+        "name": {
+          "type": "string",
+          "description": "书籍名称"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "书籍价格"
+        }
+      },
+      "title": "Book",
+      "required": [
+        "id",
+        "name",
+        "price"
+      ]
+    },
+    "DeleteRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        }
+      },
+      "title": "DeleteRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "DeleteResponse": {
+      "type": "object",
+      "title": "DeleteResponse"
+    },
+    "DetailRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1",
+          "description": "书籍编号"
+        }
+      },
+      "title": "DetailRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "DetailResponse": {
+      "type": "object",
+      "properties": {
+        "book": {
+          "$ref": "#/definitions/Book",
+          "description": "书籍详细信息"
+        }
+      },
+      "title": "DetailResponse",
+      "required": [
+        "book"
+      ]
+    },
+    "ListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "default": "1",
+          "description": "分页的页码，从1开始"
+        },
+        "pagesize": {
+          "type": "integer",
+          "format": "int32",
+          "default": "50",
+          "description": "每页数据"
+        }
+      },
+      "title": "ListRequest",
+      "required": [
+        "page",
+        "pagesize"
+      ]
+    },
+    "ListResponse": {
+      "type": "object",
+      "properties": {
+        "books": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Book"
+          },
+          "description": "书籍列表"
+        }
+      },
+      "title": "ListResponse",
+      "required": [
+        "books"
+      ]
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "admin",
+          "description": "用户名"
+        },
+        "passwd": {
+          "type": "string",
+          "default": "123456",
+          "description": "密码"
+        }
+      },
+      "title": "LoginRequest",
+      "required": [
+        "name",
+        "passwd"
+      ]
+    },
+    "LoginResponse": {
+      "type": "object",
+      "properties": {
+        "jwttoken": {
+          "type": "string",
+          "description": "jwt token"
+        }
+      },
+      "title": "LoginResponse",
+      "required": [
+        "jwttoken"
+      ]
+    },
+    "UpdateRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1",
+          "description": "书籍编号，依据编号更新其余两个信息"
+        },
+        "name": {
+          "type": "string",
+          "description": "书籍名称"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "书籍价格"
+        }
+      },
+      "title": "UpdateRequest",
+      "required": [
+        "id"
+      ]
+    },
+    "UpdateResponse": {
+      "type": "object",
+      "title": "UpdateResponse"
+    },
+    "VersionResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "版本号"
+        }
+      },
+      "title": "VersionResponse",
+      "required": [
+        "version"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

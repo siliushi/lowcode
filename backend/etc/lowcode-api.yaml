@@ -1,0 +1,24 @@
+Name: lowcode-api
+Host: 0.0.0.0
+Port: 8000
+Timeout: 0
+
+Log:
+  ServiceName: lowcode
+  Mode: console
+  Encoding: plain
+  Path: ./logs
+  Level: info
+  Compress: true
+  KeepDays: 30
+  StackCooldownMillis: 100
+
+MYSQL:
+  DSN: lowcode:qaz123!@#@tcp(127.0.0.1:3306)/lowcodedb?charset=utf8mb4&parseTime=True&loc=Asia%2FShanghai
+
+Auth:
+  AccessSecret: lowcode123
+  AccessExpire: 86400
+
+Swagger:
+  Host: 127.0.0.1:8000 #change to your server ip
